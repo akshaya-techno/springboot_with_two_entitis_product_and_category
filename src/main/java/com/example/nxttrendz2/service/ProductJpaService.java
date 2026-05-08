@@ -12,70 +12,88 @@
  */
 
 // Write your code here
-package com.example.nxttrendz1.service;
+package com.example.nxttrendz2.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
-import com.example.nxttrendz1.model.Product;
-import com.example.nxttrendz1.repository.ProductRepository;
-import com.example.nxttrendz1.repository.ProductJpaRepository;
+import com.example.nxttrendz2.model.*;
+import com.example.nxttrendz2.repository.*;
 
-import java.util.List;
+
+import java.util.*;
 
 @Service
 public class ProductJpaService implements ProductRepository {
+
     @Autowired
     private ProductJpaRepository productJpaRepository;
 
+    @Autowired
+    private CategoryJpaRepository categoryJpaRepository;
+
     @Override
-    public List<Product> getAllProducts() {
-        List<Product> product = productJpaRepository.findAll();
-        return product;
+    public List<Product> getProducts() {
+        List<Product> productList = productJpaRepository.findAll();
+        return new ArrayList<>(productList);
     }
 
     @Override
     public Product addProduct(Product product) {
-        productJpaRepository.save(product);
-        return product;
+        if (product.getCategory() != null) {
+            int categoryId = product.getCategory().getCategoryId();
+            Category category = categoryJpaRepository.findById(categoryId)
+                    .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+            product.setCategory(category);
+        }
+
+        return productJpaRepository.save(product);
     }
 
     @Override
     public Product getProductById(int productId) {
-        try {
-            Product product = productJpaRepository.findById(productId).get();
-            return product;
-        } catch (Exception e) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
-        }
+        return productJpaRepository.findById(productId)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
     }
 
     @Override
     public Product updateProduct(int productId, Product product) {
-        Product oldProduct = productJpaRepository.findById(productId).get();
-        try {
-            if (product.getProductName() != null) {
-                oldProduct.setProductName(product.getProductName());
-            }
-            if (product.getPrice() != 0D) {
-                oldProduct.setPrice(product.getPrice());
-            }
+        Product existingProduct = getProductById(productId);
 
-            productJpaRepository.save(oldProduct);
-            return oldProduct;
-        } catch (Exception e) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+        if (product.getProductName() != null) {
+            existingProduct.setProductName(product.getProductName());
         }
+        if (product.getProductDescription() != null) {
+            existingProduct.setProductDescription(product.getProductDescription());
+        }
+        if (product.getPrice() != 0) {
+            existingProduct.setPrice(product.getPrice());
+        }
+        if (product.getCategory() != null) {
+            int categoryId = product.getCategory().getCategoryId();
+            Category category = categoryJpaRepository.findById(categoryId)
+                    .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+            existingProduct.setCategory(category);
+        }
+
+        return productJpaRepository.save(existingProduct);
     }
 
     @Override
     public void deleteProduct(int productId) {
-        try {
-            productJpaRepository.deleteById(productId);
-        } catch (Exception e) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
-        }
+        Product product = getProductById(productId);
+        productJpaRepository.delete(product);
     }
+
+    @Override
+    public Category getCategoryByProductId(int productId) {
+            Product product = getProductById(productId);
+            int categoryId = product.getCategory().getCategoryId();
+            Category category = categoryJpaRepository.findById(categoryId)
+                    .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+            return category;
+    }
+
 }
