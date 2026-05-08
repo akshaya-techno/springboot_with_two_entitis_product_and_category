@@ -22,7 +22,6 @@ import org.springframework.web.server.ResponseStatusException;
 import com.example.nxttrendz2.model.*;
 import com.example.nxttrendz2.repository.*;
 
-
 import java.util.*;
 
 @Service
@@ -89,11 +88,11 @@ public class ProductJpaService implements ProductRepository {
 
     @Override
     public Category getCategoryByProductId(int productId) {
-            Product product = getProductById(productId);
-            int categoryId = product.getCategory().getCategoryId();
-            Category category = categoryJpaRepository.findById(categoryId)
-                    .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
-            return category;
+        Product product = getProductById(productId);
+        int categoryId = product.getCategory().getCategoryId();
+        Category category = categoryJpaRepository.findById(categoryId)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+        return category;
     }
 
 }

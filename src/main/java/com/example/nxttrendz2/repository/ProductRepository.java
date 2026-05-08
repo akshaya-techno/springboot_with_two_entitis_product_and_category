@@ -12,7 +12,7 @@ import com.example.nxttrendz2.model.*;
 import java.util.List;
 
 public interface ProductRepository {
-    List<Product> getAllProducts();
+    List<Product> getProducts();
 
     Product addProduct(Product product);
 
