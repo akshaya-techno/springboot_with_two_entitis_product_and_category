@@ -7,7 +7,7 @@
  */
 
 // Write your code here
-package com.example.nxttrendz1.model;
+package com.example.nxttrendz2.model;
 
 import javax.persistence.*;
 
@@ -15,39 +15,55 @@ import javax.persistence.*;
 @Table(name = "product")
 public class Product {
     @Id
-    @Column(name = "productid")
+    @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int productId;
+    private int id;
 
-    @Column(name = "productname")
-    private String productName;
+    @Column(name = "name")
+    private String name;
+
+    @Column(name = "description")
+    private String description;
 
     @Column(name = "price")
     private double price;
 
+    @ManyToOne
+    @JoinColumn(name = "categoryid")
+    private Category category;
+
     public Product() {
     }
 
-    public Product(int productId, String productName, double price) {
-        this.productId = productId;
-        this.productName = productName;
+    public Product(int productId, String productName, String description, double price) {
+        this.id = productId;
+        this.name = productName;
+        this.description = description;
         this.price = price;
     }
 
-    public void setProductId(int productId) {
-        this.productId = productId;
+    public void setProductId(int id) {
+        this.id = id;
     }
 
     public int getProductId() {
-        return productId;
+        return id;
     }
 
-    public void setProductName(String productName) {
-        this.productName = productName;
+    public void setProductName(String name) {
+        this.name = name;
     }
 
     public String getProductName() {
-        return productName;
+        return name;
+    }
+
+    public void setProductDescription(String description) {
+        this.description = description;
+    }
+
+    public String getProductDescription() {
+        return description;
     }
 
     public void setPrice(double price) {
@@ -56,5 +72,13 @@ public class Product {
 
     public double getPrice() {
         return price;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
+    }
+
+    public Category getCategory() {
+        return category;
     }
 }
