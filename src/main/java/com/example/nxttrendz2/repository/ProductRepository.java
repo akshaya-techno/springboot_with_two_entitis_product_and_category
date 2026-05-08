@@ -6,10 +6,10 @@
  * 
  */
 // Write your code here
-package com.example.nxttrendz1.repository;
+package com.example.nxttrendz2.repository;
 
-import com.example.nxttrendz1.model.Product;
-import java.util.*;
+import com.example.nxttrendz2.model.*;
+import java.util.List;
 
 public interface ProductRepository {
     List<Product> getAllProducts();
@@ -19,6 +19,8 @@ public interface ProductRepository {
     Product getProductById(int productId);
 
     Product updateProduct(int productId, Product product);
+
+    Category getCategoryByProductId(int productId);
 
     void deleteProduct(int productId);
 }
