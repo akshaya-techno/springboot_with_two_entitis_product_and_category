@@ -35,27 +35,27 @@ public class Category {
         this.description = description;
     }
 
-    public void setCategoryId(int id) {
+    public void setId(int id) {
         this.id = id;
     }
 
-    public int getCategoryId() {
+    public int getId() {
         return id;
     }
 
-    public void setCategoryName(String name) {
+    public void setName(String name) {
         this.name = name;
     }
 
-    public String getCategoryName() {
+    public String getName() {
         return name;
     }
 
-    public void setCategoryDescription(String description) {
+    public void setDescription(String description) {
         this.description = description;
     }
 
-    public String getCategoryDescription() {
+    public String getDescription() {
         return description;
     }
 }
