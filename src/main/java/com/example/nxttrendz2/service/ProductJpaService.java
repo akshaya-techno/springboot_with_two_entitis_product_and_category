@@ -42,7 +42,7 @@ public class ProductJpaService implements ProductRepository {
     @Override
     public Product addProduct(Product product) {
         if (product.getCategory() != null) {
-            int categoryId = product.getCategory().getCategoryId();
+            int categoryId = product.getCategory().getId();
             Category category = categoryJpaRepository.findById(categoryId)
                     .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
             product.setCategory(category);
@@ -61,17 +61,17 @@ public class ProductJpaService implements ProductRepository {
     public Product updateProduct(int productId, Product product) {
         Product existingProduct = getProductById(productId);
 
-        if (product.getProductName() != null) {
-            existingProduct.setProductName(product.getProductName());
+        if (product.getName() != null) {
+            existingProduct.setName(product.getName());
         }
-        if (product.getProductDescription() != null) {
-            existingProduct.setProductDescription(product.getProductDescription());
+        if (product.getDescription() != null) {
+            existingProduct.setDescription(product.getDescription());
         }
         if (product.getPrice() != 0) {
             existingProduct.setPrice(product.getPrice());
         }
         if (product.getCategory() != null) {
-            int categoryId = product.getCategory().getCategoryId();
+            int categoryId = product.getCategory().getId();
             Category category = categoryJpaRepository.findById(categoryId)
                     .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
             existingProduct.setCategory(category);
@@ -89,7 +89,7 @@ public class ProductJpaService implements ProductRepository {
     @Override
     public Category getCategoryByProductId(int productId) {
         Product product = getProductById(productId);
-        int categoryId = product.getCategory().getCategoryId();
+        int categoryId = product.getCategory().getId();
         Category category = categoryJpaRepository.findById(categoryId)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
         return category;

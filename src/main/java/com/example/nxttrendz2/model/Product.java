@@ -42,27 +42,27 @@ public class Product {
         this.price = price;
     }
 
-    public void setProductId(int id) {
+    public void setId(int id) {
         this.id = id;
     }
 
-    public int getProductId() {
+    public int getId() {
         return id;
     }
 
-    public void setProductName(String name) {
+    public void setName(String name) {
         this.name = name;
     }
 
-    public String getProductName() {
+    public String getName() {
         return name;
     }
 
-    public void setProductDescription(String description) {
+    public void setDescription(String description) {
         this.description = description;
     }
 
-    public String getProductDescription() {
+    public String getDescription() {
         return description;
     }
 

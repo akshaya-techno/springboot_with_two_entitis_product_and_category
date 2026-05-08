@@ -52,11 +52,11 @@ public class CategoryJpaService implements CategoryRepository {
     public Category updateCategory(int categoryId, Category category) {
         Category existingCategory = getCategoryById(categoryId);
 
-        if (category.getCategoryName() != null) {
-            existingCategory.setCategoryName(category.getCategoryName());
+        if (category.getName() != null) {
+            existingCategory.setName(category.getName());
         }
-        if (category.getCategoryDescription() != null) {
-            existingCategory.setCategoryDescription(category.getCategoryDescription());
+        if (category.getDescription() != null) {
+            existingCategory.setDescription(category.getDescription());
         }
 
         return categoryJpaRepository.save(existingCategory);
