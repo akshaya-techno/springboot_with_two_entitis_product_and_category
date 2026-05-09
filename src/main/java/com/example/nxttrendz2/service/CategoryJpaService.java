@@ -66,7 +66,7 @@ public class CategoryJpaService implements CategoryRepository {
     public void deleteCategory(int categoryId) {
         Category category = categoryJpaRepository.findById(categoryId)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
-            categoryJpaRepository.delete(category);
+        categoryJpaRepository.delete(category);
 
     }
 }
