@@ -64,12 +64,10 @@ public class CategoryJpaService implements CategoryRepository {
 
     @Override
     public void deleteCategory(int categoryId) {
-        try {
+        
             Category category = getCategoryById(categoryId);
             categoryJpaRepository.delete(category);
-        } catch (Exception e) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
-        }
+        
 
     }
 }
