@@ -64,10 +64,9 @@ public class CategoryJpaService implements CategoryRepository {
 
     @Override
     public void deleteCategory(int categoryId) {
-        
-            Category category = getCategoryById(categoryId);
-            categoryJpaRepository.delete(category);
-        
+
+        Category category = getCategoryById(categoryId);
+        categoryJpaRepository.delete(category);
 
     }
 }

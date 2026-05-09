@@ -25,27 +25,28 @@ public class ProductController {
     @Autowired
     private ProductJpaService productJpaService;
 
-    @GetMapping("/products")
+    @GetMapping("/categories/products")
     public List<Product> getAllProducts() {
         return productJpaService.getProducts();
     }
 
-    @PostMapping("/products")
+    @PostMapping("/categories/products")
+
     public Product addProduct(@RequestBody Product product) {
         return productJpaService.addProduct(product);
     }
 
-    @GetMapping("/products/{productId}")
+    @GetMapping("/categories/products/{productId}")
     public Product getProductById(@PathVariable int productId) {
         return productJpaService.getProductById(productId);
     }
 
-    @PutMapping("/products/{productId}")
+    @PutMapping("/categories/products/{productId}")
     public Product updateProduct(@PathVariable int productId, @RequestBody Product product) {
         return productJpaService.updateProduct(productId, product);
     }
 
-    @DeleteMapping("/products/{productId}")
+    @DeleteMapping("/categories/products/{productId}")
     public void deleteProduct(@PathVariable int productId) {
         productJpaService.deleteProduct(productId);
     }
