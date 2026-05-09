@@ -64,9 +64,18 @@ public class CategoryJpaService implements CategoryRepository {
 
     @Override
     public void deleteCategory(int categoryId) {
+<<<<<<< HEAD
 
         Category category = getCategoryById(categoryId);
         categoryJpaRepository.delete(category);
+=======
+        
+            Category category = categoryJpaRepository.findById(categoryId)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+            categoryJpaRepository.delete(category);
+        
+>>>>>>> before final commit 5
 
     }
 }
+
