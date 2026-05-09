@@ -46,6 +46,7 @@ public class CategoryController {
     }
 
     @DeleteMapping("/categories/{categoryId}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteCategory(@PathVariable int categoryId) {
         categoryJpaService.deleteCategory(categoryId);
     }

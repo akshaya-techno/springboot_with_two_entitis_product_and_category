@@ -83,7 +83,7 @@ public class ProductJpaService implements ProductRepository {
     @Override
     public void deleteProduct(int productId) {
         Product product = productJpaRepository.findById(productId)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NO_CONTENT));
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
         productJpaRepository.delete(product);
     }
 
